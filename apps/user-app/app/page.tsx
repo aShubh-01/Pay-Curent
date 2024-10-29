@@ -1,12 +1,15 @@
 "use client"
 
-import { useGetBalance, useSetBalance } from "@repo/store/hooks"
-import { useEffect } from "react";
+import { AppBar } from "@repo/ui/appbar";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Home() {
-  const value : number = useGetBalance();
-  
+  const session = useSession();
   return <div>
-    {value}
+    <AppBar 
+      user={session.data?.user}
+      onSignIn={signIn}
+      onSignOut={signOut}
+    />
   </div>
 }
