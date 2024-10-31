@@ -8,7 +8,7 @@ export const Select = ({ options, onSelect } : {
     onSelect: (value: string) => void
 }) => {
 
-    return <select className='text-center border-black border-[2px] rounded-md p-1' 
+    return <select className='my-2 w-full font-semibold text-center bg-white border-black border-[2px] rounded-md py-[7px]' 
     onChange={(e) => {
         onSelect(e.target.value)
     }}>

@@ -25,7 +25,7 @@ export const AddMoney = () => {
 
             }}/>
             <div>
-                <label className=''>Bank</label>
+                <label className='font-semibold text-[18px]'>Bank</label>
                 <Select 
                     onSelect={(value) => {
                         setRedirectUrl(SUPPORTED_BANKS.find(x => x.name === value)?.redirectTo)
@@ -38,7 +38,7 @@ export const AddMoney = () => {
             </div>
             <div className='flex justify-center pt-4'>
                 <Button 
-                    className='bg-slate-600'
+                    className='text-[20px] bg-black text-white font-semibold py-2 px-4 rounded-md'
                     onClick={() => {
                         window.location.href = redirectUrl || "";
                     }}> 

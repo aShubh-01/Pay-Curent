@@ -6,10 +6,10 @@ export const TextInput = ({ placeholder, label, onChange } : {
     onChange: (value: string) => void
 }) => {
 
-    return <div>
-        <label className=''>{label}</label>
+    return <div className='my-2'>
+        <label className='text-[18px] font-semibold'>{label}</label>
         <input
-            className='p-1 pl-4 w-[350px] text-[18px] focus:outline-none border-black border-[2px] rounded-md' 
+            className='my-2 p-1 pl-4 w-full text-[18px] focus:outline-none border-black border-[2px] rounded-md' 
             type='text'
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
