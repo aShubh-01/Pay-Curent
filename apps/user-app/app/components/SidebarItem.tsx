@@ -12,8 +12,8 @@ export const SidebarItem = ({ href, title, icon} : {
     const pathname = usePathname();
     const selected = (pathname === href)
 
-    return <div className={`hover:border-black
-            md:text-[20px] font-semibold p-[2px] m-1 my-3 border-b-[1px] border-white flex ${selected ? 'text-blue-600' : 'text-black'} cursor-pointer gap-1 place-items-center`}
+    return <div className={`md:text-[20px] md:my-3
+            hover:border-black text-[12px] font-semibold p-[2px] m-1 border-b-[1px] border-white flex ${selected ? 'text-blue-600' : 'text-black'} cursor-pointer gap-1 place-items-center`}
         onClick={() => {
             router.push(href)
         }}
