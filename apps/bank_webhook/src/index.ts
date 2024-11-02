@@ -2,7 +2,8 @@ import express from 'express';
 import prisma from '@repo/database/client';
 
 const app = express();
-const port = process.env.WEBHOOK_PORT;
+const port = process.env.WEBHOOK_PORT || 3003;
+app.use(express.json())
 
 app.post('/hdfcWebhook', async (req, res) => {
     // zod validation
@@ -16,13 +17,15 @@ app.post('/hdfcWebhook', async (req, res) => {
     try {
         await prisma.$transaction([
             prisma.balance.updateMany({
-                where: { userId: parseInt(paymentInformation.userId) },
+                where: { userId: Number(paymentInformation.userId) },
                 data: {
                     amount: { increment: parseInt(paymentInformation.amount)}
                 }
             }),
             prisma.onRampTransaction.updateMany({
-                where: { token: paymentInformation.token },
+                where: {
+                    token: paymentInformation.token
+                },
                 data: {
                     status: 'Success'
                 }

@@ -24,6 +24,11 @@ enum OnRampStatus {
   Processing
 }
 
+enum Flow {
+  Credit
+  Debit
+}
+
 model User {
   id Int @id @default(autoincrement())
   email String? @unique
@@ -47,6 +52,7 @@ model OnRampTransaction {
   token String
   provider String
   amount Int
+  flow Flow
   startTime DateTime
   userId Int
   user User @relation(fields: [userId], references: [id])

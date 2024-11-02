@@ -12,7 +12,8 @@ async function main() {
             onRampTransaction: {
                 create: {
                     startTime: new Date(),
-                    status: "Success",
+                    status: "Processing",
+                    flow: 'Credit',
                     amount: 24600,
                     token: "122",
                     provider: "HDFC Bank"
@@ -32,6 +33,7 @@ async function main() {
                 create: {
                     startTime: new Date(),
                     status: "Success",
+                    flow: 'Credit',
                     amount: 24600,
                     token: "122",
                     provider: "HDFC Bank"

@@ -20,13 +20,17 @@ async function getBalance() {
 async function getOnRampTransactions() {
     const session = await getServerSession(authOptions);
     const txns = await prisma.onRampTransaction.findMany({
-        where: { userId: parseInt(session?.user?.id) },
+        where: { 
+            userId: parseInt(session?.user?.id),
+            status: 'Success',
+
+        }
     })
 
     return txns.map(t => ({
         time: t.startTime,
+        flow: t.flow,
         amount: t.amount,
-        status: t.status,
         provider: t.provider
     }))
 }
@@ -38,14 +42,14 @@ export default async function Page({ children } : {
     const transactions = await getOnRampTransactions();
 
     return <div className='w-full p-2'>
-        <h3 className='text-blue-500 font-bold text-[30px]'>Transfer</h3>
+        <h3 className='text-blue-500 font-bold text-[30px]'>Wallet</h3>
         <section className='pt-10 flex justify-around'>
-            <div className='w-[600px] h-[320px] rounded-lg p-1 bg-slate-100'>
+            <div className='w-1/2 m-1 h-fit rounded-lg p-3 bg-slate-100'>
                 <AddMoney />
             </div>
-            <div className='w-[600px] p-1'>
-                <div className='bg-slate-100 m-1 mb-2'><BalanceCard amount={balance.amount} locked={balance.locked}/></div>
-                <div className='bg-slate-100 m-1 mt-2'><OnRampTransactions transactions={transactions}/></div>
+            <div className='w-full mx-1'>
+                <div className='p-3 bg-slate-100 m-1 rounded-lg mb-4'><BalanceCard amount={balance.amount} locked={balance.locked}/></div>
+                <div className='p-3 bg-slate-100 m-1 rounded-lg mt-2'><OnRampTransactions transactions={transactions}/></div>
             </div>
         </section>
     </div>
