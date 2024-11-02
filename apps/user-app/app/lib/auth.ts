@@ -37,22 +37,22 @@ export const authOptions = {
                     return null
                 }
 
-                try {
-                    const user = await prisma.user.create({
-                        data: {
-                            number: credentials.phone,
-                            password: hashedPassword
-                        }
-                    });
+                // try {
+                //     const user = await prisma.user.create({
+                //         data: {
+                //             number: credentials.phone,
+                //             password: hashedPassword
+                //         }
+                //     });
 
-                    return {
-                        id: user.id.toString(),
-                        name: user?.name || "",
-                        contact: user.number
-                    }
-                } catch (err) {
-                    console.error(err)
-                }
+                //     return {
+                //         id: user.id.toString(),
+                //         name: user?.name || "",
+                //         contact: user.number
+                //     }
+                // } catch (err) {
+                //     console.error(err)
+                // }
 
                 return null
             }
