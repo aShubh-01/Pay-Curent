@@ -39,10 +39,10 @@ async function getTransactions() {
                 { fromUserId: Number(session.user.id) },
                 { toUserId: Number(session.user.id) }
             ]
-        }
+        },
     }) 
 
-    p2PTransactions.forEach((txn) => {
+    p2PTransactions.forEach((txn : any) => {
         filteredP2PTransactions.push({
             time: txn.timestamp,
             flow: (session.user.id == txn.fromUserId ? 'Debit' : 'Credit'),
@@ -50,7 +50,7 @@ async function getTransactions() {
         })
     })
 
-    OnRampTransactions.forEach((t) => {
+    OnRampTransactions.forEach((t : any) => {
         filteredP2PTransactions.push({
             time: t.startTime,
             flow: t.flow,

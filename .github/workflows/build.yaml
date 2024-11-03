@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Generate Prisma
-        run: npm run database:generate
+        run: npm run database:migrate
         
       - name: Run Build
         run: npm run build
