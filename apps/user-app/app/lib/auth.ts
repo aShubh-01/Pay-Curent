@@ -48,7 +48,7 @@ export const authOptions = {
                         number: ""
                     }
 
-                    await prisma.$transaction(async (txn) => {
+                    await prisma.$transaction(async (txn : any) => {
                         const user = await txn.user.create({
                             data: {
                                 number: credentials.phone,
