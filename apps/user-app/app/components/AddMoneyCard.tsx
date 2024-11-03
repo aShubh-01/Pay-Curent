@@ -18,7 +18,7 @@ const SUPPORTED_BANKS = [{
 export const AddMoney = () => {
     const [ redirectUrl, setRedirectUrl ] = useState(SUPPORTED_BANKS[0]?.redirectTo)
     const [ provider, setProvider ] = useState(SUPPORTED_BANKS[0]?.name || "")
-    const [ amount, setAmount ] = useState(0);
+    const [ amount, setAmount ] = useState('');
 
     return <Card title="Add Money to Wallet">
         <div className='w-full'>
@@ -40,7 +40,7 @@ export const AddMoney = () => {
                 <Button 
                     className='text-[20px] bg-black text-white font-semibold py-2 px-4 rounded-md'
                     onClick={async () => {
-                        await createOnRampTransaction(provider, amount * 100)
+                        await createOnRampTransaction(provider, parseInt(amount) * 100)
                         window.location.href = redirectUrl || "";
                     }}> 
                     Add Money

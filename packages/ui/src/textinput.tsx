@@ -3,7 +3,7 @@
 export const TextInput = ({ placeholder, label, onChange } : {
     placeholder: string,
     label: string,
-    onChange: (value: number) => void
+    onChange: (value: string) => void
 }) => {
 
     return <div className='my-2'>
@@ -13,7 +13,7 @@ export const TextInput = ({ placeholder, label, onChange } : {
             type='text'
             placeholder={placeholder}
             onChange={(e) => {
-                onChange(parseInt(e.target.value))
+                onChange(e.target.value)
             }}
         />
     </div>
