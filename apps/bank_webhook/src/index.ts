@@ -17,14 +17,18 @@ app.post('/hdfcWebhook', async (req, res) => {
     try {
         await prisma.$transaction([
             prisma.balance.updateMany({
-                where: { userId: Number(paymentInformation.userId) },
+                where: { 
+                    userId: Number(paymentInformation.userId),
+                    user: { onRampTransaction: { some: { status: 'Processing' } } }
+                },
                 data: {
                     amount: { increment: parseInt(paymentInformation.amount)}
                 }
             }),
+
             prisma.onRampTransaction.updateMany({
                 where: {
-                    token: paymentInformation.token
+                    token: paymentInformation.token,
                 },
                 data: {
                     status: 'Success'
@@ -33,7 +37,7 @@ app.post('/hdfcWebhook', async (req, res) => {
         ])
     
         res.status(200).json({
-            message: 'Success'
+            message: 'Captured'
         });
 
     } catch (err) {

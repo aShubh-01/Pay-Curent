@@ -37,6 +37,8 @@ model User {
   password String
   onRampTransaction OnRampTransaction[]
   balance Balance[]
+  sentTransfers P2PTransactions[] @relation(name: "FromUserRelation")
+  receivedTransfers P2PTransactions[] @relation(name: "ToUserRelation")
 }
 
 model Merchant {
@@ -50,7 +52,7 @@ model OnRampTransaction {
   id Int @id @default(autoincrement())
   status OnRampStatus
   token String
-  provider String
+  provider String?
   amount Int
   flow Flow
   startTime DateTime
@@ -60,8 +62,18 @@ model OnRampTransaction {
 
 model Balance {
   id Int @id @default(autoincrement())
-  userId Int 
+  userId Int @unique
   amount Int
   locked Int
   user User @relation(fields: [userId], references: [id])
+}
+
+model P2PTransactions {
+  id Int @id @default(autoincrement())
+  amount Int
+  timestamp DateTime
+  fromUserId Int
+  fromUser User @relation(name: "FromUserRelation", fields: [fromUserId], references: [id])
+  toUserId Int
+  toUser User @relation(name: "ToUserRelation", fields: [toUserId], references: [id])
 }
