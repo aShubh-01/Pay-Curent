@@ -2,6 +2,6 @@
 
 export default function() : JSX.Element {
     return <div>
-        Transaction Page
+        All Transaction Page
     </div>
 }
