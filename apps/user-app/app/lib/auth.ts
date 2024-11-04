@@ -37,7 +37,7 @@ export const authOptions = {
                     return null
                 }
 
-                try {
+                 try {
                     const user = await prisma.user.create({
                         data: {
                             number: credentials.phone,
