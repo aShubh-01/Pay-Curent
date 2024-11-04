@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build-and-push:
+  build-and-push:                                # Login to DockerHub
     runs-on: ubuntu-latest
     steps:
     - name: Check Out Repo
@@ -18,7 +18,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and Push Docker image
+    - name: Build and Push Docker image         # Push Image to DockerHub
       uses: docker/build-push-action@v2
       with:
         context: .
@@ -29,7 +29,7 @@ jobs:
     - name: Verify Pushed Image
       run: docker pull ashubhd/paymentsapp:latest 
 
-    - name: Deploy to EC2
+    - name: Deploy to EC2                         #Deploy to EC2
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
