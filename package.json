@@ -6,7 +6,9 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "database:migrate": "cd packages/database && npx prisma migrate deploy && npx prisma generate && cd ../.."
+    "database:generate": "cd packages/database && npx prisma generate && cd ../..",
+    "start-user-app" : "cd apps/user-app && npm run dev",
+    "start-bank-webhook-app" : "cd apps/bank_webhook && npm run dev"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
