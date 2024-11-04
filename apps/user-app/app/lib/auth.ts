@@ -38,42 +38,28 @@ export const authOptions = {
                 }
 
                 try {
-                    let newUser : {
-                        id: number,
-                        name: string | null,
-                        number: string
-                    } = {
-                        id:  0,
-                        name: "",
-                        number: ""
-                    }
+                    const user = await prisma.user.create({
+                        data: {
+                            number: credentials.phone,
+                            password: hashedPassword
+                        },
+                        select: { id: true, number: true, name: true }
+                    });
 
-                    await prisma.$transaction(async (txn : any) => {
-                        const user = await txn.user.create({
-                            data: {
-                                number: credentials.phone,
-                                password: hashedPassword
-                            },
-                            select: { id: true, number: true, name: true }
-                        });
-    
-                        await txn.balance.create({
-                            data: {
-                                userId: user.id,
-                                amount: 0,
-                                locked: 0
-                            }
-                        })
-
-                        newUser = user;
+                    await prisma.balance.create({
+                        data: {
+                            userId: user.id,
+                            amount: 0,
+                            locked: 0
+                        }
                     })
-
+                    
                     return {
-                        id: newUser.id.toString(),
-                        name: newUser?.name || "",
-                        contact: newUser.number
+                        id: user.id.toString(),
+                        name: user?.name || "",
+                        contact: user.number
                     }
-
+                    
                 } catch (err) {
                     console.error(err)
                 }
