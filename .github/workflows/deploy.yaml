@@ -29,7 +29,8 @@ jobs:
     - name: Verify Pushed Image
       run: docker pull ashubhd/paymentsapp:latest 
 
-    - name: Deploy to EC2                         #Deploy to EC2 Instace
+
+    - name: Deploy to EC2                         # Deploy to EC2 Instance
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
