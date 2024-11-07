@@ -40,4 +40,4 @@ jobs:
           sudo docker pull ashubhd/paymentsapp:latest
           sudo docker stop paymentsapp || true
           sudo docker rm paymentsapp || true
-          sudo docker run -d --name paymentsapp -p 30005:3000 ashubhd/paymentsapp:latest
+          sudo docker run -d --name paymentsapp -p 3005:3000 ashubhd/paymentsapp:latest
